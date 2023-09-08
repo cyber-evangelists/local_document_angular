@@ -15,7 +15,7 @@ export class AppComponent {
     sessionStorage.removeItem('user'); 
   
     // Redirect to the login page
-    this.router.navigate(['/login']);
+    this.router.navigate(['/auth']);
   }
  
 }

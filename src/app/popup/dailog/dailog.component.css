@@ -1,0 +1,40 @@
+/* your-component.component.css */
+.dialog {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    align-content: center;
+    background-color: white;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+    padding: 20px;
+    text-align: center;
+    width: 400px; /* Set the width */
+    max-width: 90%; /* Optionally, set a maximum width as a percentage of the viewport width */
+    height: 250px; /* Set the height; "auto" allows it to expand based on content */
+    max-height: 100vh; /* Optionally, set a maximum height as a percentage of the viewport height */
+}
+  
+  .dialog h2 {
+    font-size: 24px;
+    margin-bottom: 10px;
+  }
+  
+  .dialog p {
+    font-size: 18px;
+    margin-bottom: 20px;
+  }
+  
+  .dialog button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .dialog button:hover {
+    background-color: #0056b3;
+  }
+  

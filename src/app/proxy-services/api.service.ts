@@ -1,21 +1,20 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { Keys } from './Keys';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ApiService {
-  private baseUrl = 'http://localhost:5000'; // Update with your API URL
-  private readonly USERNAME_KEY = 'user';
-  private readonly USERPASS_KEY = '#$$%456';
+  private baseUrl = 'http://localhost:5000'; 
 
   username: any;
   password: any;
 
   constructor(private http: HttpClient) {
-    const name = sessionStorage.getItem(this.USERNAME_KEY);
-    const pass =  sessionStorage.getItem(this.USERNAME_KEY);
+    const name = sessionStorage.getItem(Keys.USERNAME_KEY);
+    const pass =  sessionStorage.getItem(Keys.USERPASS_KEY);
     if(name != null && pass != null)
     {
         this.username = name;
@@ -64,7 +63,7 @@ export class ApiService {
 
   getFiles(): Observable<any> {
     const headers = new HttpHeaders({
-      'Content-Type': 'application/json', // Set the appropriate content type
+      'Content-Type': 'application/json', 
     });
 
     const body = {
