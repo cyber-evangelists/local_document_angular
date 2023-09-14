@@ -10,9 +10,11 @@ export class DialogService {
   constructor(private dialog: MatDialog) {}
 
   open(title: string, message: string) {
+    console.log(title,message);
     const dialogRef = this.dialog.open(DailogComponent, {
-      data: { title, message }
+      data: { dialogTitle : title, dialogText: message }
     });
+
   }
 
   close() {

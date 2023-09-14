@@ -1,5 +1,7 @@
-import { ChangeDetectorRef, Component, Input } from '@angular/core';
+import {  Component,  Inject,  Input } from '@angular/core';
 import { DialogService } from '../dialog.service';
+import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+
 
 @Component({
   selector: 'app-dailog',
@@ -7,10 +9,9 @@ import { DialogService } from '../dialog.service';
   styleUrls: ['./dailog.component.css']
 })
 export class DailogComponent {
-  @Input() title: string = 'Error';
-  @Input() message: string = 'Something Want Wrong Please Contact to Admin';
 
-  constructor(private dialogService: DialogService) {
+  constructor(private dialogService: DialogService,
+    @Inject(MAT_DIALOG_DATA) public data: any) {
   }
 
   close() {

@@ -27,14 +27,14 @@ export class DocumentListComponent {
 this.apiService.getFiles().subscribe(
       (data) => {
         this.documents = data;
-        console.log(this.documents);
+        //console.log(this.documents);
         this.isLoading = false; // Set loading to false when data is received
 
       },
       (error) => {
-        console.error('Error fetching documents:', error);
+        //console.error('Error fetching documents:', error);
         this.isLoading = false; // Set loading to false when data is received
-        this.dialogService.open('Info', 'This is an informational message.');
+        this.dialogService.open('Error', 'Error fetching documents:'+error.message);
       }
     );
   }
@@ -42,12 +42,12 @@ this.apiService.getFiles().subscribe(
   Download(docName:string)
   {
     this.apiService.getFile(docName).subscribe((response: any) => {
-      console.log(response);
+      //console.log(response);
       this.saveFile(response, docName); // Adjust file name and extension as needed
     },
    (error)=> {
-    console.error('Error Downloading:', error);
-    this.dialogService.open('Info', 'This is an informational message.');
+    //console.error('Error Downloading:', error);
+    this.dialogService.open('Error', 'Error Downloading:'+error.message);
 }    
     );
   }

@@ -20,7 +20,7 @@ export class LoginComponent {
     if(this.username != '' && this.password != '')
     {
       if (this.authService.isAuthenticated(this.username,this.password)) {
-        console.log('Login successful');
+        //console.log('Login successful');
         this.router.navigate(['/home']);
         
       } else {
