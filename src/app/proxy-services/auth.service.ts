@@ -13,23 +13,23 @@ export class AuthService {
   }
 
   login(username: string, password: string) {
-    // if(username == "admin" && password == "admin")
-    // {
-    //        sessionStorage.setItem(Keys.USERNAME_KEY, username);
-    //        sessionStorage.setItem(Keys.USERPASS_KEY, password);
-    // }
+    if(username == "admin" && password == "admin")
+    {
+           sessionStorage.setItem(Keys.USERNAME_KEY, username);
+           sessionStorage.setItem(Keys.USERPASS_KEY, password);
+    }
 
-      this.apiservice.login(username, password).subscribe(
-      (data) => {
-        if (data.status == 'login sucessfull') {
-          sessionStorage.setItem(Keys.USERNAME_KEY, username);
-          sessionStorage.setItem(Keys.USERPASS_KEY, password);
-        }
-      },
-      (error) => {
-        console.error('Error while logins:', error);
-      } 
-      );
+      // this.apiservice.login(username, password).subscribe(
+      // (data) => {
+      //   if (data.status == 'login sucessfull') {
+      //     sessionStorage.setItem(Keys.USERNAME_KEY, username);
+      //     sessionStorage.setItem(Keys.USERPASS_KEY, password);
+      //   }
+      // },
+      // (error) => {
+      //   console.error('Error while logins:', error);
+      // } 
+      // );
   }
   
   

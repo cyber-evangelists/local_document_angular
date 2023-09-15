@@ -7,7 +7,7 @@ import { Keys } from './Keys';
   providedIn: 'root',
 })
 export class ApiService {
-  private baseUrl = 'http://localhost:5000'; 
+  private baseUrl = 'https://c02a-223-123-6-160.ngrok-free.app'; 
 
   username: any;
   password: any;
@@ -43,7 +43,7 @@ export class ApiService {
     return this.http.post(`${this.baseUrl}/upload_file`, formData);
   }
 
-  getFile(filename: string): Observable<any> {
+  getFile(filename: string,filePath:string): Observable<any> {
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
     });
@@ -51,7 +51,8 @@ export class ApiService {
     const body = {
       username: this.username,
       password: this.password,
-      filename: filename,
+      file_name: filename,
+      file_path: filePath
     };
     const options = {
       headers,

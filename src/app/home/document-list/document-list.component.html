@@ -1,15 +1,10 @@
 <div class="document-container">
     <div class="table-container">
-      <input
-      type="text"
-      class="form-control mb-3"
-      placeholder="Search Document"
-      [(ngModel)]="searchTerm"
-      (input)="filterDocuments(searchTerm)"    />
     <table class="document-table table table-bordered">
       <thead>
         <tr>
-          <th>Documents</th>
+          <th>Document Name</th>
+          <th>URL</th>
           <th>Action</th>
         </tr>
       </thead>
@@ -21,10 +16,11 @@
             </div>
           </td>
         </tr>
-        <tr *ngFor="let document of documents">
-          <td>{{ document }}</td>
+        <tr *ngFor="let document of documents | keyvalue">
+          <td>{{document.key}}</td>
+          <td>{{ document.value[0] }}</td>
           <td>
-            <button type="button" class="btn btn-success" (click)="Download(document)">Edit</button>
+            <button type="button" class="btn btn-success" (click)="Download(document.key,document.value[0],document.value[1])">Edit</button>
           </td>
         </tr>
       </tbody>
