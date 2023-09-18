@@ -12,21 +12,24 @@ export class LoginComponent {
   username = '';
   password = '';
   error='';
+  isLoggingIn: boolean = false;
 
   constructor(private authService: AuthService,
     private router : Router) {}
 
-  onSubmit(): void {
-    if(this.username != '' && this.password != '')
-    {
-      if (this.authService.isAuthenticated(this.username,this.password)) {
-        //console.log('Login successful');
-        this.router.navigate(['/home']);
-        
-      } else {
-        this.error ='Login failed';
+    onSubmit(): void {
+      if (this.username !== '' && this.password !== '') {
+        this.isLoggingIn = true; // Disable the button
+        this.authService.login(this.username, this.password).subscribe((authenticated) => {
+          this.isLoggingIn = false; // Enable the button after the API call is complete
+          if (authenticated) {
+            this.router.navigate(['/home']);
+          } else {
+            this.error = 'Login failed';
+          }
+        });
       }
     }
-  }
+    
 
 }
