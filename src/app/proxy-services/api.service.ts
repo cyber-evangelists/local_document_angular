@@ -7,10 +7,10 @@ import { Keys } from './Keys';
   providedIn: 'root',
 })
 export class ApiService {
-  private baseUrl = 'https://7938-119-152-49-159.ngrok-free.app'; 
+  private baseUrl = 'http://localhost:5000'; 
 
-  username: any;
-  password: any;
+  username: string ="";
+  password: string="";
 
   constructor(private http: HttpClient) {
     const name = sessionStorage.getItem(Keys.USERNAME_KEY);
@@ -20,6 +20,10 @@ export class ApiService {
         this.username = name;
         this.password = pass;
     }
+  }
+
+  ngOnInit(): void {
+   
   }
 
   login(username:string,password:string): Observable<any> {
@@ -48,9 +52,13 @@ export class ApiService {
       'Content-Type': 'application/json',
     });
 
+    
+    const name = sessionStorage.getItem(Keys.USERNAME_KEY);
+    const pass =  sessionStorage.getItem(Keys.USERPASS_KEY);
+
     const body = {
-      username: this.username,
-      password: this.password,
+      username: name,
+      password: pass,
       file_name: filename,
       file_path: filePath
     };
@@ -64,14 +72,19 @@ export class ApiService {
 
   getFiles(): Observable<any> {
     const headers = new HttpHeaders({
-      'Content-Type': 'application/json', 
+      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Headers': 'Content-Type',
+      'Content-Type': 'application/json;',
     });
 
+    const name = sessionStorage.getItem(Keys.USERNAME_KEY);
+    const pass =  sessionStorage.getItem(Keys.USERPASS_KEY);
+
     const body = {
-      username: this.username,
-      password: this.password,
+      username: name,
+      password: pass,
     };
 
-    return this.http.post(`${this.baseUrl}/getfiles`,body, { headers });
+    return this.http.post(`${this.baseUrl}/get_files_data`, body);
   }
 }
