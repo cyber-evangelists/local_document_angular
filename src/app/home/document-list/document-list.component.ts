@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { DialogService } from 'src/app/popup/dialog.service';
+import { Keys } from 'src/app/proxy-services/Keys';
 import { ApiService } from 'src/app/proxy-services/api.service';
 
 @Component({
@@ -22,6 +23,10 @@ export class DocumentListComponent {
   ngOnInit(): void {
     this.isLoading=true;
     this.GetAllFiles();
+    const name = sessionStorage.getItem(Keys.USERNAME_KEY);
+    const pass =  sessionStorage.getItem(Keys.USERPASS_KEY);
+    console.log(name);
+    console.log(pass);
   }
 
   GetAllFiles()
@@ -36,7 +41,7 @@ this.apiService.getFiles().subscribe(
       (error) => {
         //console.error('Error fetching documents:', error);
         this.isLoading = false; // Set loading to false when data is received
-        this.dialogService.open('Error', 'Error fetching documents:'+error.message);
+        this.dialogService.open('Error', 'Error fetching documents:'+ error.message);
       }
     );
   }
