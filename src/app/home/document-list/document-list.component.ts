@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ToastrService } from 'ngx-toastr';
 import { DialogService } from 'src/app/popup/dialog.service';
 import { ApiService } from 'src/app/proxy-services/api.service';
 
@@ -14,7 +15,8 @@ export class DocumentListComponent {
   searchTerm: string = '';
 
   constructor(private apiService :ApiService,
-    private dialogService: DialogService
+    private dialogService: DialogService,
+    private toastr: ToastrService
     ) { }
 
   ngOnInit(): void {
@@ -43,7 +45,8 @@ this.apiService.getFiles().subscribe(
   {
     this.apiService.getFile(docName,filepath).subscribe((response: any) => {
       console.log(response);
-      this.saveFile(response, docName,filepath,metadata); // Adjust file name and extension as needed
+      this.saveFile(response, docName,filepath,metadata);
+      this.toastr.info('File DownLoaded', 'Info');
     },
    (error)=> {
     console.error('Error Downloading:', error);

@@ -7,6 +7,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { DailogComponent } from './popup/dailog/dailog.component';
 import { MatDialogModule } from '@angular/material/dialog';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
   declarations: [
@@ -19,6 +21,8 @@ import { MatDialogModule } from '@angular/material/dialog';
     HttpClientModule,
     FormsModule ,
     MatDialogModule,
+    BrowserAnimationsModule, // Required for animations
+    ToastrModule.forRoot() // ToastrModule added here
   ],
   providers: [],
   bootstrap: [AppComponent]
