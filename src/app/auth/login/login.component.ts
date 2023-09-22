@@ -25,11 +25,15 @@ export class LoginComponent {
         this.authService.login(this.username, this.password).subscribe((authenticated) => {
           this.isLoggingIn = false; // Enable the button after the API call is complete,
           if (authenticated) {
-            this.toastr.success('SuccessFully Login', 'Success');
+            this.toastr.success('SuccessFully Login', 'Success',{
+              positionClass:"toast-bottom-right"
+            });
             this.router.navigate(['/home']);
           } else {
             this.error = 'Login failed';
-            this.toastr.warning('Login failed', 'Warn');
+            this.toastr.warning('Login failed', 'Warn',{
+              positionClass:"toast-bottom-right"
+            });
 
           }
         });

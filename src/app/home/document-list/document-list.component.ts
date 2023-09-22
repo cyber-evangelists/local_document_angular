@@ -23,10 +23,6 @@ export class DocumentListComponent {
   ngOnInit(): void {
     this.isLoading=true;
     this.GetAllFiles();
-    const name = sessionStorage.getItem(Keys.USERNAME_KEY);
-    const pass =  sessionStorage.getItem(Keys.USERPASS_KEY);
-    console.log(name);
-    console.log(pass);
   }
 
   GetAllFiles()
@@ -34,29 +30,39 @@ export class DocumentListComponent {
 this.apiService.getFiles().subscribe(
       (data) => {
         this.documents = data;
-        console.log(this.documents);
         this.isLoading = false; // Set loading to false when data is received
 
       },
       (error) => {
         //console.error('Error fetching documents:', error);
         this.isLoading = false; // Set loading to false when data is received
-        this.dialogService.open('Error', 'Error fetching documents:'+ error.message);
+        if(error.status == 404)
+        {
+          this.dialogService.open('Error', 'Error fetching documents Please Contact to Admin');
+        }
       }
     );
   }
 
   Download(docName:string,filepath:string,metadata:string)
   {
-    this.apiService.getFile(docName,filepath).subscribe((response: any) => {
-      console.log(response);
-      this.saveFile(response, docName,filepath,metadata);
-      this.toastr.info('File DownLoaded', 'Info');
+    this.apiService.getFile(docName,filepath).subscribe((response: any) => {      
+        this.saveFile(response, docName,filepath,metadata);
+        this.toastr.info('File DownLoaded', 'Info',{
+          positionClass:"toast-bottom-right"
+        });
+      
     },
    (error)=> {
-    console.error('Error Downloading:', error);
-    this.dialogService.open('Error', 'Error Downloading:'+error.message);
-}    
+    if(error.status == 409)
+      {
+        this.dialogService.open('Warning','file already in editing process by another user');
+      }
+      else if(error.status == 500)
+      {
+        this.dialogService.open('Warning','file has virus');
+      }
+  } 
     );
   }
 

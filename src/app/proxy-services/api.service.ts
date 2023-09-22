@@ -7,7 +7,7 @@ import { Keys } from './Keys';
   providedIn: 'root',
 })
 export class ApiService {
-  private baseUrl = 'http://localhost:5000'; 
+  private baseUrl = 'https://8a75-223-123-4-103.ngrok-free.app'; 
 
   username: string ="";
   password: string="";
