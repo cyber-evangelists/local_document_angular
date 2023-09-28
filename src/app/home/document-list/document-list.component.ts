@@ -72,7 +72,7 @@ private saveFile(data: any, fileName: string,filepath:string,metadata:string) {
 
   const a = document.createElement('a');
   a.href = url;
-  a.download = metadata.substring(1);
+  a.download = "LFH;" + metadata.substring(1);
   a.click();
 
   window.URL.revokeObjectURL(url); 
